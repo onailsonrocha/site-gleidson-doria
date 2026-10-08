@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Sparkles, Quote, ChevronLeft, ChevronRight, Star, Zap } from 'lucide-react';
 import tatianeFoto from '../../assets/img/tatiane-santos.jpeg';
 import vanessaFoto from '../../assets/img/vanessa-nichetti.jpeg';
 import lilianeFoto from '../../assets/img/liliane-bamberg.jpeg';
@@ -56,150 +57,193 @@ export const Results: React.FC = () => {
   useEffect(() => {
     if (isModalOpen) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) / testimonialsData.length ? (prevIndex + 1) % testimonialsData.length : 0);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsData.length);
     }, 6000);
     return () => clearInterval(interval);
   }, [isModalOpen]);
 
   const current = testimonialsData[currentIndex];
 
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonialsData.length);
+  };
+
   return (
-    <section id="resultados" className="py-24 bg-white text-zinc-900 relative overflow-hidden">
+    <section id="resultados" className="py-28 bg-white text-zinc-900 relative overflow-hidden">
       
-      {/* Elementos decorativos de fundo mais evidentes */}
+      {/* Atmosfera e Iluminação Surreal de Fundo (bg-white puro) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Blob esquerdo superior */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-2xl" />
-        
-        {/* Blob direito inferior */}
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-2xl" />
+        {/* Glows radiais nas diagonais */}
+        <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[140px]" />
 
-        {/* Padrão de pontos bem visível nas laterais */}
-        <div className="absolute top-1/2 left-6 -translate-y-1/2 opacity-20 text-emerald-600 hidden lg:block">
-          <svg className="w-32 h-64" fill="currentColor" viewBox="0 0 100 200">
-            <pattern id="dots-left" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="3" cy="3" r="3" />
-            </pattern>
-            <rect width="100" height="200" fill="url(#dots-left)" />
-          </svg>
-        </div>
+        {/* Grid técnico sutil de precisão */}
+        <div className="absolute inset-0 opacity-[0.4]" style={{
+          backgroundImage: `linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
 
-        <div className="absolute top-1/2 right-6 -translate-y-1/2 opacity-20 text-emerald-600 hidden lg:block">
-          <svg className="w-32 h-64" fill="currentColor" viewBox="0 0 100 200">
-            <pattern id="dots-right" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="3" cy="3" r="3" />
-            </pattern>
-            <rect width="100" height="200" fill="url(#dots-right)" />
-          </svg>
-        </div>
-
-        {/* Linhas curvas / rabiscos orgânicos evidentes cruzando o fundo */}
-        <svg className="absolute inset-0 w-full h-full text-emerald-600/15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 1440 800" preserveAspectRatio="none">
-          <path d="M-100,200 C300,400 500,0 800,300 C1100,600 1300,100 1500,400" />
-          <path d="M-100,500 C400,200 600,700 900,400 C1200,100 1350,600 1600,300" opacity="0.6" />
-        </svg>
+        {/* Molduras de Canto Técnicas */}
+        <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-emerald-500/30 rounded-tl-lg hidden lg:block" />
+        <div className="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-emerald-500/30 rounded-tr-lg hidden lg:block" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-semibold tracking-widest uppercase text-emerald-600 mb-3 block">Depoimentos</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Histórias que inspiram resultados</h2>
+        
+        {/* Cabeçalho de Autoridade */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-emerald-700 bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full mb-4 shadow-inner">
+            <Zap className="w-3.5 h-3.5 text-emerald-600" /> Prova Social & Histórias Reais
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6">
+            Histórias que inspiram <span className="text-emerald-600 underline decoration-emerald-500/30 underline-offset-8">resultados</span>
+          </h2>
+          <p className="text-zinc-600 text-base sm:text-lg leading-relaxed">
+            O impacto real do método na vida, na saúde e na performance de quem confia no trabalho.
+          </p>
         </div>
 
-        {/* Card do Carrossel */}
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-zinc-50/90 backdrop-blur-sm border border-zinc-200/80 p-6 sm:p-10 rounded-2xl shadow-md flex flex-col justify-between min-h-[460px] sm:min-h-[380px] relative">
+        {/* Card Principal do Carrossel */}
+        <div className="max-w-4xl mx-auto relative">
+          
+          {/* Botões de Navegação Lateral Externa */}
+          <button 
+            onClick={handlePrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-8 z-20 w-12 h-12 rounded-full bg-white border border-zinc-200/90 shadow-xl flex items-center justify-center text-zinc-800 hover:bg-emerald-500 hover:text-zinc-950 hover:border-emerald-500 transition-all duration-300 cursor-pointer hidden sm:flex"
+            aria-label="Depoimento anterior"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button 
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-8 z-20 w-12 h-12 rounded-full bg-white border border-zinc-200/90 shadow-xl flex items-center justify-center text-zinc-800 hover:bg-emerald-500 hover:text-zinc-950 hover:border-emerald-500 transition-all duration-300 cursor-pointer hidden sm:flex"
+            aria-label="Próximo depoimento"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Caixa Central do Testemunho */}
+          <div className="bg-zinc-50/90 backdrop-blur-md border border-zinc-200/90 p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden group">
             
-            <div>
-              {/* Cabeçalho do Card (Foto, Nome e Papel) */}
-              <div className="flex items-center gap-4 mb-6">
-                
-                {/* Foto Clicável para abrir o Retrato */}
-                <div 
-                  className="relative group cursor-pointer"
-                  onClick={() => setIsModalOpen(true)}
-                  title="Clique para ver em formato retrato"
-                >
-                  <img 
-                    src={current.avatar} 
-                    alt={current.name} 
-                    className={`w-16 h-16 object-cover rounded-full border-2 border-emerald-600 shadow-sm transition-transform duration-300 group-hover:scale-105 ${current.objectPosition}`} 
-                  />
-                  <div className="absolute inset-0 bg-black/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+            {/* Linha de luz superior no hover */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-80" />
+
+            {/* Ícone de Citação Grande em Marca d'água */}
+            <div className="absolute top-6 right-8 text-emerald-500/10 pointer-events-none">
+              <Quote className="w-24 h-24" />
+            </div>
+
+            <div className="relative z-10 flex flex-col justify-between min-h-[380px]">
+              
+              <div>
+                {/* Cabeçalho do Aluno (Avatar com borda brilhante e zoom) */}
+                <div className="flex items-center gap-5 mb-8">
+                  <div 
+                    className="relative group/avatar cursor-pointer"
+                    onClick={() => setIsModalOpen(true)}
+                    title="Clique para ver em formato retrato"
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full blur opacity-70 group-hover/avatar:opacity-100 transition duration-300" />
+                    <img 
+                      src={current.avatar} 
+                      alt={current.name} 
+                      className={`relative w-20 h-20 object-cover rounded-full border-2 border-white shadow-md transition-transform duration-500 group-hover/avatar:scale-105 ${current.objectPosition}`} 
+                    />
+                    <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover/avatar:opacity-100 transition-opacity flex items-center justify-center text-white">
+                      <Sparkles className="w-5 h-5 text-emerald-400" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{current.name}</h3>
+                    <p className="text-sm font-bold text-emerald-600 mt-0.5">{current.role}</p>
                   </div>
                 </div>
 
-                <div>
-                  <h3 className="text-xl font-bold">{current.name}</h3>
-                  <p className="text-sm text-emerald-600 font-semibold">{current.role}</p>
+                {/* Avaliação em Estrelas e Depoimento */}
+                <div className="mb-8">
+                  <div className="flex gap-1 mb-4 text-emerald-500">
+                    {[...Array(current.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-emerald-500 text-emerald-500" />
+                    ))}
+                  </div>
+                  <p className="text-base sm:text-lg text-zinc-700 italic leading-relaxed whitespace-pre-line font-medium">
+                    "{current.comment}"
+                  </p>
                 </div>
               </div>
 
-              {/* Comentário */}
-              <div className="mb-6 min-h-[220px] sm:min-h-[140px] flex flex-col justify-start">
-                <div className="flex gap-1 mb-3 text-emerald-500">
-                  {[...Array(current.rating)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
+              {/* Rodapé Interno com Controles Mobile e Bolinhas */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-zinc-200/80">
+                <div className="flex justify-center items-center gap-2">
+                  {testimonialsData.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        currentIndex === idx ? 'w-10 bg-emerald-500 shadow-md shadow-emerald-500/20' : 'w-2.5 bg-zinc-300 hover:bg-zinc-400'
+                      }`}
+                      aria-label={`Ir para depoimento ${idx + 1}`}
+                    />
                   ))}
                 </div>
-                <p className="text-base sm:text-lg text-zinc-600 italic leading-relaxed whitespace-pre-line">"{current.comment}"</p>
+
+                {/* Setas Mobile */}
+                <div className="flex sm:hidden gap-3">
+                  <button onClick={handlePrev} className="w-10 h-10 rounded-full bg-zinc-200 flex items-center justify-center text-zinc-800 cursor-pointer">
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button onClick={handleNext} className="w-10 h-10 rounded-full bg-zinc-200 flex items-center justify-center text-zinc-800 cursor-pointer">
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="text-xs text-zinc-400 font-semibold tracking-wider uppercase">
+                  Depoimento {currentIndex + 1} de {testimonialsData.length}
+                </div>
               </div>
-            </div>
 
-            {/* Controles de Navegação (Indicadores / Bolinhas) */}
-            <div className="flex justify-center items-center gap-2 pt-4 border-t border-zinc-200">
-              {testimonialsData.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    currentIndex === idx ? 'w-8 bg-emerald-600' : 'w-2 bg-zinc-300'
-                  }`}
-                  aria-label={`Ir para depoimento ${idx + 1}`}
-                />
-              ))}
             </div>
-
           </div>
         </div>
 
       </div>
 
-      {/* Modal de Retrato (Abre ao clicar na foto) */}
+      {/* Modal de Retrato (Abre ao clicar na foto) com Estilo Cinematográfico */}
       {isModalOpen && (
         <div 
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setIsModalOpen(false)} // Fecha ao clicar fora
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 animate-fadeIn"
+          onClick={() => setIsModalOpen(false)}
         >
           <div 
-            className="relative max-w-sm w-full bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl border border-zinc-700"
-            onClick={(e) => e.stopPropagation()} // Impede fechar ao clicar na caixa interna
+            className="relative max-w-sm w-full bg-zinc-950 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 p-2"
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Botão de Fechar */}
             <button 
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-3 right-3 z-10 bg-black/60 hover:bg-black text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+              className="absolute top-5 right-5 z-20 bg-zinc-900/90 hover:bg-emerald-500 hover:text-zinc-950 text-white w-10 h-10 rounded-full flex items-center justify-center border border-zinc-700 transition-all duration-300 shadow-xl cursor-pointer"
               aria-label="Fechar"
             >
               ✕
             </button>
 
-            {/* Imagem em tamanho de retrato */}
+            {/* Imagem em tamanho de retrato otimizada */}
             <img 
               src={current.avatar} 
               alt={current.name} 
-              className={`w-full h-[400px] object-cover ${current.objectPosition}`} 
+              className={`w-full h-[420px] object-cover rounded-2xl ${current.objectPosition}`} 
             />
 
-            {/* Informações do Aluno */}
-            <div className="p-5 text-center bg-zinc-900 text-white">
-              <h4 className="text-lg font-bold">{current.name}</h4>
-              <p className="text-xs text-emerald-400 mt-1">{current.role}</p>
+            {/* Informações do Aluno no Modal */}
+            <div className="p-6 text-center bg-zinc-950 text-white">
+              <h4 className="text-xl font-extrabold">{current.name}</h4>
+              <p className="text-xs font-semibold text-emerald-400 mt-1">{current.role}</p>
             </div>
           </div>
         </div>
